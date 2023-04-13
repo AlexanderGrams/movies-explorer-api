@@ -1,1 +1,1 @@
-# movies-explorer-api
+домен для обращения к back-end - https://api.films.nomoredomains.monster
