@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 
 const { URL_REGEX } = require('../utils/constants');
 
-const cardSchema = new mongoose.Schema({
+const movieSchema = new mongoose.Schema({
   country: {
     type: String,
     required: true,
@@ -54,8 +53,7 @@ const cardSchema = new mongoose.Schema({
     required: true,
   },
   movieId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'movie',
+    type: Number,
     required: true,
   },
   nameRU: {
@@ -72,4 +70,4 @@ const cardSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('card', cardSchema);
+module.exports = mongoose.model('card', movieSchema);
