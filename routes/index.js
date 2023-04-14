@@ -14,7 +14,7 @@ router.use(auth);
 
 // Все доступные роуты страницы с авторизацией
 router.use('/users', userRoutes);
-router.use('/cards', movieRoutes);
+router.use('/movies', movieRoutes);
 
 // // обработка ошибки, если введен несуществующий URL
 router.use((req, res, next) => next(new NotFoundError('Такого URL не существует')));
