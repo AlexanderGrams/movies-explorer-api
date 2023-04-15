@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-
-const { URL_REGEX } = require('../utils/constants');
+const validator = require('validator');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -27,7 +26,9 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (url) => URL_REGEX.test(url),
+      validator(value) {
+        return validator.isURL(value);
+      },
       message: 'Требуется ввести URL',
     },
   },
@@ -35,7 +36,9 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (url) => URL_REGEX.test(url),
+      validator(value) {
+        return validator.isURL(value);
+      },
       message: 'Требуется ввести URL',
     },
   },
@@ -43,7 +46,9 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (url) => URL_REGEX.test(url),
+      validator(value) {
+        return validator.isURL(value);
+      },
       message: 'Требуется ввести URL',
     },
   },
