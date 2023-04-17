@@ -9,7 +9,7 @@ const {
 router.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(4),
+    password: Joi.string().required(),
   }),
 }), login);
 
@@ -17,8 +17,8 @@ router.post('/signin', celebrate({
 router.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(4),
-    name: Joi.string().min(2).max(30),
+    password: Joi.string().required(),
+    name: Joi.string().required().min(2).max(30),
   }),
 }), createUser);
 

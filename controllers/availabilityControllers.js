@@ -7,6 +7,8 @@ const UnauthorizedError = require('../errors/UnauthorizedError');
 const User = require('../models/userSchema');
 const { JWT_SECRET } = require('../utils/config');
 
+const { NODE_ENV } = process.env;
+
 // POST /signin ---- Авторизация
 const login = (req, res, next) => {
   const { email, password } = req.body;
@@ -18,10 +20,10 @@ const login = (req, res, next) => {
         if (matched) {
           return user;
         }
-        throw next(new UnauthorizedError('Неправильные почта или пароль'));
+        throw new UnauthorizedError('Неправильные почта или пароль');
       }))
     .then((user) => {
-      const token = jsonwebtoken.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+      const token = jsonwebtoken.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
       res.send({ _id: user._id, token });
     })
     .catch(next);

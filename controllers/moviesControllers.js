@@ -54,7 +54,7 @@ const createMovies = (req, res, next) => {
       if (err.name === 'ValidationError') {
         return next(new InaccurateDataError('Переданы некорректные данные'));
       }
-      return (err);
+      return next(err);
     });
 };
 
@@ -67,10 +67,10 @@ const deleteMovie = (req, res, next) => {
   Movie.findById(_id)
     .then((movie) => {
       if (!movie) {
-        throw next(new NotFoundError('Фильм не найден'));
+        throw new NotFoundError('Фильм не найден');
       }
       if (userId !== String(movie.owner)) {
-        throw next(new ForbiddenError('Нет прав для удаления этого фильма'));
+        throw new ForbiddenError('Нет прав для удаления этого фильма');
       }
       return movie.deleteOne();
     })
